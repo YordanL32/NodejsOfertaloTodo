@@ -27,7 +27,7 @@ app.listen(config.puerto,()=> {
   
 });
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/vistas/principal.html');
+    res.sendFile(__dirname + '/vistas/index.html');
 })
 app.get('/registro', function(req, res){
     res.sendFile(__dirname + '/vistas/registro.html');
