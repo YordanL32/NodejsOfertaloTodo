@@ -35,15 +35,6 @@ app.use('/',rutas);
 app.listen(app.get('port'), ()=> {  
   console.log(`iniciando el servidor en el puerto ...${app.get('port')}`);    
 });
-<<<<<<< HEAD:ProyectoNodejs/app.js
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/vistas/index.html');
-})
-app.get('/registro', function(req, res){
-    res.sendFile(__dirname + '/vistas/registro.html');
-})
-=======
->>>>>>> 5bf6445a38ed5d4480bd3784f1e8a2921f3c2cd4:ProyectoNodejs/src/app.js
 
 
 
