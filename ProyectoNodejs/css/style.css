@@ -930,11 +930,11 @@ textarea.input {
 }
 
 .product .product-body .product-name>a:hover, .product .product-body .product-name>a:focus {
-  color: #199939fc008000;
+  color: #199939fc;
 }
 
 .product .product-body .product-price {
-  color: #199939fc008000;
+  color: #199939fc;
   font-size: 18px;
 }
 
@@ -1257,7 +1257,7 @@ textarea.input {
 }
 
 .noUi-connect {
-  background-color: #199939fc008000008000;
+  background-color: #199939fc;
 }
 
 .noUi-horizontal {
@@ -1270,7 +1270,7 @@ textarea.input {
   left: -6px;
   top: -4px;
   border: none;
-  background: #199939fc008000008000;
+  background: #199939fc;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 50%;
@@ -1331,12 +1331,12 @@ textarea.input {
 
 .store-grid li:hover {
   background-color: #E4E7ED;
-  color: #199939fc008000;
+  color: #199939fc;
 }
 
 .store-grid li.active {
-  background-color: #199939fc008000;
-  border-color: #199939fc008000;
+  background-color: #199939fc;
+  border-color: #199939fc;
   color: #FFF;
   cursor: default;
 }
