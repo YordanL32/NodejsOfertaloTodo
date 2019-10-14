@@ -1,22 +1,31 @@
 {
-  "name": "proyectonodejs",
+  "name": "NOTES-APP",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/app.js ",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/index.js"
   },
-  "author": "Yordan lopez",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "ejs": "^2.7.1",
+=======
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+>>>>>>> master
     "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.16.2",
     "method-override": "^3.0.0",
     "mongoose": "^5.7.1",
-    "morgan": "^1.9.1"
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "req-flash": "0.0.3"
   },
   "devDependencies": {
     "nodemon": "^1.19.2"

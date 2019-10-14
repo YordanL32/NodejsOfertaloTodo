@@ -1,0 +1,27 @@
+ 
+ <div class="row">
+  <div class="col-md-4 mx-auto" style="left: 30%; margin-right: 200px; ">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Actualizar Publicacion</h3>
+            </div>           
+            <div class="card-body">
+                <form action="/publicaciones/editPublic/{{publicacion._id}}?_method=PUT" method="POST">
+                    <input type="hidden" name="method" value="PUT">
+                    <div class="form-group">
+                        <input type="text" name="titulo" class="form-control" placeholder="titulo" value="{{publicacion.titulo}}">
+                    </div> 
+                    <div class="form-group">
+                        <textarea type="text" name="descripcion" class="form-control" placeholder="descripcion">{{publicacion.descripcion}}</textarea>
+                    </div> 
+                    <div class="form-group">
+                      <button class="btn btn-primary btn-block " type="submit">Actualizar</button>
+                    </div>                     
+                </form>
+               
+            </div>
+            
+        </div>
+
+    </div>
+    </div> 
