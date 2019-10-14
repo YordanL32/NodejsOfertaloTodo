@@ -1,13 +1,11 @@
 const express = require(`express`);
 const router = express.Router();
+const ctrlHome = require('../api/home');
 
 
 
-router.get(`/`, (req, res)=> {
-res.render(`index`);
-});
+router.get(`/`, ctrlHome.index );
 
-router.get(`/about`, (req, res)=> {
-    res.render(`about`);
-    });
+
+router.get(`/about`, ctrlHome.about );
 module.exports = router;

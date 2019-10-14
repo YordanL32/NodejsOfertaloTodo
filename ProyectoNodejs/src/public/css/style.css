@@ -410,7 +410,28 @@ textarea.input {
 /*----------------------------*\
 	Top header
 \*----------------------------*/
-
+/* estilos ofertalo Todo Formulario publicar */
+.row { 
+  padding-top: 10px;
+  
+    
+}
+.card2{
+  border: rgb(238, 235, 235)1px solid;
+  padding: 1%
+}
+.card-header2 { 
+  padding-top: 10px;
+  
+  background-color: #1E1F29;
+  
+}
+.card-header2 h1{ 
+  color: #FFF;
+  padding-bottom: 10px;
+  font-size: 20px;
+}
+/* ----------fin ofertaloTodo---------------- */
 #top-header {
   padding-top: 10px;
   padding-bottom: 10px;
