@@ -3,8 +3,11 @@ const path = require(`path`);
 const exphbs = require (`express-handlebars`);
 const methodOverride = require(`method-override`); 
 const session = require(`express-session`);
-const flash = require ('connect-flash');
+const flash = require ('connect-flash');// para mensajes
 const passport = require(`passport`);
+const multer = require('multer');
+const morgan = require('morgan'); // dependencia para subir fotos
+
 
 
 //inicializaciones
@@ -19,15 +22,18 @@ app.engine(`.hbs`, exphbs({
     defaultLayout:`main`,
     layoutsDir: path.join(app.get(`views`), `layouts`) ,
     partialsDir: path.join(app.get(`views`),  `partials`) ,
-    extname: `.hbs`
+    extname: `.hbs`,
+    helpers: require('./helpers')
 
 }));
 app.set(`view engine`, `.hbs`);
 
 
 // Midlewares (antes de pasar a las rutas)
-
+app.use(morgan('dev'))
+app.use(multer({dest: path.join(__dirname, './public/upload/temp' )}).single('image'));
 app.use(express.urlencoded({extended: false}));
+app.use(express.json()); // para manejar los Likes
 app.use(methodOverride(`_method`));
 app.use(session({
     secret: `mysecretapp`,
@@ -53,6 +59,7 @@ app.use((req, res, next) => {
 app.use(require(`./routes/index`));
 app.use(require(`./routes/publicaciones`));
 app.use(require(`./routes/users`));
+
 
 
 //archivos estaticos
