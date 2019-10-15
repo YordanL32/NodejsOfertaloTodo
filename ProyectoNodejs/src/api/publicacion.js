@@ -101,7 +101,7 @@ ctrl.delete = async(req, res)=> {
     await fs.unlink(path.resolve('./src/public/upload/' + publicaciones.imagen));
     await Comentario.deleteOne({publicacion_id: publicaciones._id});
     await publicaciones.remove();
-    res.json(true);
+    res.redirect('/publicaciones');
   }
     console.log(req.params.publicaciones_id);
 };
