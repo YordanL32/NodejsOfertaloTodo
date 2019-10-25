@@ -7,6 +7,7 @@ const flash = require ('connect-flash');// para mensajes
 const passport = require(`passport`);
 const multer = require('multer');
 const morgan = require('morgan'); // dependencia para subir fotos
+const cors = require('cors')
 
 
 
@@ -16,6 +17,7 @@ require(`./database`);
 require(`./config/passport`)
 
 //configuraciones 
+app.use(cors())
 app.set(`port`, process.env.PORT || 3000);
 app.set(`views`, path.join(__dirname, `views`));
 app.engine(`.hbs`, exphbs({
@@ -59,6 +61,7 @@ app.use((req, res, next) => {
 app.use(require(`./routes/index`));
 app.use(require(`./routes/publicaciones`));
 app.use(require(`./routes/users`));
+app.use(require(`./routes/categorias`));
 
 
 

@@ -11,7 +11,7 @@ router.post(`/publicaciones/:publicaciones_id/like`, ctrlPublic.likes );
 router.post(`/publicaciones/:publicaciones_id/comentarios`, ctrlPublic.comentarios );
 router.delete(`/publicaciones/:publicaciones_id`, ctrlPublic.delete );
 
-router.get(`/publicaciones`,isAuthenticated,ctrlPublic.mostrarPublicacion);
+router.get(`/publicaciones`,ctrlPublic.mostrarPublicacion);
 
 
 //Registro de  publicaciones

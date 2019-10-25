@@ -24,8 +24,10 @@ ctrl.detalPublic  =async(req, res) =>{
   
 };
 ctrl.mostrarPublicacion= async(req, res) => {
-  const publicaciones = await Publicacion.find({user:req.user.id}).sort({Create_at:'desc'});//ordena publicaciones por orden de fecha
-  res.render(`publicaciones/todasPublic`,{publicaciones});
+  /* {user:req.user.id} */
+  const publicaciones = await Publicacion.find().sort({Create_at:'desc'});//ordena publicaciones por orden de fecha
+  res.json(publicaciones)
+  /* res.render(`publicaciones/todasPublic`,{publicaciones}); */
 }
 
 ctrl.create = (req, res)=> {   
