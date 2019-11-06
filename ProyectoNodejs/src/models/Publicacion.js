@@ -6,11 +6,12 @@ var publicacionSchema = new Schema({
     titulo: {type: String, require:true},
     descripcion: {type: String, require:true},
     imagen: {type: String},
+    categoria:{ type: Schema.ObjectId, ref: "categorias" },
     precio: {type: Number},
     vistas: {type: Number, default: 0},
     likes: {type: Number, default: 0},
     Create_at : {type: Date,require: true, default: Date.now},
-    user: {type: String} 
+   /*  user: {type: String}  */
 })
 publicacionSchema.virtual('uniqueId')
   .get(function () {

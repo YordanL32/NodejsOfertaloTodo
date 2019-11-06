@@ -8,8 +8,7 @@ const passport = require(`passport`);
 const multer = require('multer');
 const morgan = require('morgan'); // dependencia para subir fotos
 const cors = require('cors')
-
-
+const bodyParser = require('body-parser')
 
 //inicializaciones
 const app = express();
@@ -27,14 +26,40 @@ app.engine(`.hbs`, exphbs({
     extname: `.hbs`,
     helpers: require('./helpers')
 
-}));
+}))
+
+
 app.set(`view engine`, `.hbs`);
 
 
 // Midlewares (antes de pasar a las rutas)
 app.use(morgan('dev'))
-app.use(multer({dest: path.join(__dirname, './public/upload/temp' )}).single('image'));
-app.use(express.urlencoded({extended: false}));
+app.use(bodyParser.json({limit: '50mb'}))
+app.use(express.urlencoded({extended: true}));
+app.use(express.static('public'));
+
+const storage = multer.diskStorage({
+    destination: path.join(__dirname, 'public/upload' ),
+    filename: (req, file, cb) =>{ 
+        cb(null, file.originalname)
+    }
+  })
+const upload = multer({
+    storage,
+    dest: path.join(__dirname, 'public/upload' ),
+    limits: { fileSize: 5000000  },
+     fileFilter: (req, file, cb) => {
+      const filetypes = /jpeg|jpg|png|gif/
+      const mimetype = filetypes.test(file.mimetype)
+      const extname = filetypes.test(path.extname(file.originalname))
+      if(mimetype && extname ){
+        return cb(null,true)
+      }
+      cb('Error: el el achivo debe ser una imagen valida')
+      console.log('Error: el el achivo debe ser una imagen valida')
+    } 
+  }).single('imagen')
+  app.use(upload);
 app.use(express.json()); // para manejar los Likes
 app.use(methodOverride(`_method`));
 app.use(session({
