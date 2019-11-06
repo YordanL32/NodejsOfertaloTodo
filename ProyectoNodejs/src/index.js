@@ -6,17 +6,17 @@ const methodOverride = require(`method-override`);
 const session = require(`express-session`);
 const multer = require('multer');
 const morgan = require('morgan'); // dependencia para subir fotos
-<<<<<<< HEAD
-const cors = require('cors')
-const bodyParser = require('body-parser')
+
 
 //inicializaciones
-=======
+
 const http = require('http');
 const debug = require('debug')('notasdb:server')
 const chalk = require('chalk')
 var sockets = require('./socket')
->>>>>>> 0963b3b1bcb024a9a673ba22ad368691eddb724d
+const cors = require('cors')
+const bodyParser = require('body-parser')
+
 const app = express();
 const cors = require('cors')
 const port = process.env.PORT || 9004;
@@ -26,24 +26,7 @@ import { mongoUrl } from './config'
 import { Usuario, Login } from './routes'
 
 app.use(cors())
-<<<<<<< HEAD
-app.set(`port`, process.env.PORT || 3000);
-app.set(`views`, path.join(__dirname, `views`));
-app.engine(`.hbs`, exphbs({
-    defaultLayout:`main`,
-    layoutsDir: path.join(app.get(`views`), `layouts`) ,
-    partialsDir: path.join(app.get(`views`),  `partials`) ,
-    extname: `.hbs`,
-    helpers: require('./helpers')
-
-}))
-
-
-app.set(`view engine`, `.hbs`);
-
-=======
 //inicializaciones
->>>>>>> 0963b3b1bcb024a9a673ba22ad368691eddb724d
 
 app.use(express.static('public'));
 // Midlewares (antes de pasar a las rutas)
