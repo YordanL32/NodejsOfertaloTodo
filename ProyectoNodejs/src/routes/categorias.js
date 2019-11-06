@@ -1,6 +1,5 @@
 const express = require(`express`);
 const router = express.Router();
-const {isAuthenticated} = require('../helpers/auth');
 const ctrlCategoria= require('../api/categoria');
 
 router.get(`/categorias/:id`, ctrlCategoria.findById);

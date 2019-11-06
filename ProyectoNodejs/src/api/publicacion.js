@@ -2,7 +2,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const {randomNumber }= require('../helpers/libs');
-const { Publicacion, Comentario} = require('../models');
+const { Publicacion, Usuario, Comentario} = require('../models');
 const md5 = require('md5');
 const ctrl = {}
 
