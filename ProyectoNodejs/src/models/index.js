@@ -1,6 +1,4 @@
-module.exports ={
-    Publicacion: require('./Publicacion'),
-    user: require('./User'),
-    Comentario: require('./Comentario'),
-    Categoria: require('./Categoria')
-}
+export { default as Usuario } from './Usuario'
+export { default as Categoria } from './Categoria'
+export { default as Comentario } from './Comentario'
+export { default as Publicacion } from './Publicacion'

@@ -1,36 +1,27 @@
+'use strict'
 const express = require(`express`);
 const path = require(`path`);
 const exphbs = require (`express-handlebars`);
 const methodOverride = require(`method-override`); 
 const session = require(`express-session`);
-const flash = require ('connect-flash');// para mensajes
-const passport = require(`passport`);
 const multer = require('multer');
 const morgan = require('morgan'); // dependencia para subir fotos
-const cors = require('cors')
-
-
-
-//inicializaciones
+const http = require('http');
+const debug = require('debug')('notasdb:server')
+const chalk = require('chalk')
+var sockets = require('./socket')
 const app = express();
-require(`./database`);
-require(`./config/passport`)
+const cors = require('cors')
+const port = process.env.PORT || 9004;
+const server = http.createServer(app);
+import mongoose from 'mongoose'
+import { mongoUrl } from './config'
+import { Usuario, Login } from './routes'
 
-//configuraciones 
 app.use(cors())
-app.set(`port`, process.env.PORT || 3000);
-app.set(`views`, path.join(__dirname, `views`));
-app.engine(`.hbs`, exphbs({
-    defaultLayout:`main`,
-    layoutsDir: path.join(app.get(`views`), `layouts`) ,
-    partialsDir: path.join(app.get(`views`),  `partials`) ,
-    extname: `.hbs`,
-    helpers: require('./helpers')
+//inicializaciones
 
-}));
-app.set(`view engine`, `.hbs`);
-
-
+app.use(express.static('public'));
 // Midlewares (antes de pasar a las rutas)
 app.use(morgan('dev'))
 app.use(multer({dest: path.join(__dirname, './public/upload/temp' )}).single('image'));
@@ -43,33 +34,43 @@ app.use(session({
     saveUninitialized: true
 
 }));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash()); 
+
 
 
 // variables globales
-app.use((req, res, next) => {
- res.locals.success_msg = req.flash(`success_msg`);
- res.locals.error_msg = req.flash(`error_msg`);
- res.locals.error = req.flash(`error`); //mensajes errores del login
- res.locals.user = req.user || null; //mensajes errores del login
- next();
-});
+
 
 // routes 
-app.use(require(`./routes/index`));
-app.use(require(`./routes/publicaciones`));
-app.use(require(`./routes/users`));
-app.use(require(`./routes/categorias`));
+app.use('/api/login', Login)
+app.use('/api/usuario/', Usuario)
 
+app.use((err, req, res, next) => {
+ debug(`Error: ${err.message}`)
 
+  if (err.message.match('/not found/')) {
+    return res.status(404).send({ err: err.message })
+  }
 
-//archivos estaticos
-app.use(express.static(path.join(__dirname, `/public`)));
+  res.status(500).send({ error: err.message })
+})
 
+function handleFatalError (err) {
+  console.error(`${chalk.red(['fatal error'])} ${err.message}`)
+  console.error(err.stack)
+}
 
-//servidor esta escuchando 
-app.listen(app.get(`port`), () =>{
-console.log(`Iniciando servidor en el puerto: `, app.get(`port`));
-});
+//conectarse a db
+sockets.startSocketServer(server)
+async function start () {
+  const db = await mongoose.connect('mongodb://127.0.0.1:27017/notasdb')
+  if (!module.parent) {
+    process.on('uncaughtException', handleFatalError)
+    process.on('unhandledRejection', handleFatalError)
+    
+    server.listen(port, '0.0.0.0', () => {
+      console.log(`${chalk.green('[notasdb-server]')} server listening on port ${port}`)
+    })
+  }
+
+}
+start()

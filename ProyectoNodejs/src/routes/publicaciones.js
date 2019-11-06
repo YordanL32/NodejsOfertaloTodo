@@ -1,10 +1,8 @@
 const express = require(`express`);
 const router = express.Router();
 /* const modPublicacion = require('../models/Publicacion'); */
-const {isAuthenticated} = require('../helpers/auth');
 const ctrlPublic= require('../api/publicacion');
 
-router.get(`/publicaciones/add`,isAuthenticated, ctrlPublic.index);
 router.get(`/publicaciones/:publicaciones_id`, ctrlPublic.detalPublic ); 
 router.post(`/publicaciones`, ctrlPublic.create );
 router.post(`/publicaciones/:publicaciones_id/like`, ctrlPublic.likes );
