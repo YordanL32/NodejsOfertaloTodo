@@ -14,7 +14,7 @@ const http = require('http');
 const debug = require('debug')('notasdb:server')
 const chalk = require('chalk')
 var sockets = require('./socket')
-const cors = require('cors')
+
 const bodyParser = require('body-parser')
 
 const app = express();
@@ -23,17 +23,17 @@ const port = process.env.PORT || 9004;
 const server = http.createServer(app);
 import mongoose from 'mongoose'
 import { mongoUrl } from './config'
-import { Usuario, Login } from './routes'
+import { Usuario, Login,Categoria,Publicacion } from './routes'
 
 app.use(cors())
 //inicializaciones
-
-app.use(express.static('public'));
+//archuvis estaticos
+app.use(express.static(path.join(__dirname, 'public')))
 // Midlewares (antes de pasar a las rutas)
 app.use(morgan('dev'))
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(express.urlencoded({extended: true}));
-app.use(express.static('public'));
+
 
 const storage = multer.diskStorage({
     destination: path.join(__dirname, 'public/upload' ),
@@ -74,6 +74,8 @@ app.use(session({
 // routes 
 app.use('/api/login', Login)
 app.use('/api/usuario/', Usuario)
+app.use('/api/categorias/', Categoria)
+app.use('/api/publicaciones/', Publicacion)
 
 app.use((err, req, res, next) => {
  debug(`Error: ${err.message}`)
@@ -99,7 +101,7 @@ async function start () {
     process.on('unhandledRejection', handleFatalError)
     
     server.listen(port, '0.0.0.0', () => {
-      console.log(`${chalk.green('[notasdb-server]')} server listening on port ${port}`)
+      console.log(`${chalk.green('[notasdb-server]')} Escuchando por el puerto: ${port}`)
     })
   }
 

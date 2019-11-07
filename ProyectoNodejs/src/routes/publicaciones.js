@@ -8,9 +8,9 @@ const path = require('path')
 const ctrlPublic= require('../api/publicacion')
 
  
-router.post(`/publicaciones`, ctrlPublic.create )
+/* router.post(`/publicaciones`, ctrlPublic.create ) */
 
-router.post(`/image`, async (req, res) => {
+router.post(`/`, async (req, res) => {
     console.log(req.file)
     const {titulo, descripcion , precio } = req.body
     let imagen = ""
@@ -26,13 +26,13 @@ router.post(`/image`, async (req, res) => {
     }
   })
 
-router.get(`/publicaciones/add`, ctrlPublic.index)
-router.get(`/publicaciones/:publicaciones_id`, ctrlPublic.detalPublic ) 
+/* router.get(`/publicaciones/add`, ctrlPublic.index) */
+router.get(`/:publicaciones_id`, ctrlPublic.detalPublic ) 
 
-router.post(`/publicaciones/:publicaciones_id/like`, ctrlPublic.likes )
-router.post(`/publicaciones/:publicaciones_id/comentarios`, ctrlPublic.comentarios )
-router.delete(`/publicaciones/:publicaciones_id`, ctrlPublic.delete )
+router.post(`/:publicaciones_id/like`, ctrlPublic.likes )
+router.post(`/:publicaciones_id/comentarios`, ctrlPublic.comentarios )
+router.delete(`/:publicaciones_id`, ctrlPublic.delete )
 
-router.get(`/publicaciones`,ctrlPublic.mostrarPublicacion)
+router.get(`/`,ctrlPublic.mostrarPublicacion)
 
 module.exports = router
