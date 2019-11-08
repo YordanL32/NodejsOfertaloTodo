@@ -34,7 +34,6 @@ app.get('/', async (req, res) => {
     try {
     	console.log('pasa por ')
       let q = req.body;
-      console.log('pasa')
       const data = await Usuario.create(q);
       res.status(201).json(data);
     } catch (error) {
