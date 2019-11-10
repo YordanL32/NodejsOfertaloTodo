@@ -13,9 +13,17 @@ export default{
     },
 
     create: q => {
-        //debug(`Creating new usuario`);
-        const data = new Usuario(q);
-        return data.save();
+        return Usuario.findOne({email:q.email})
+    .then(function(data){
+      if(data){
+        console.log('pasa if create')
+        return {message:'El usuario ya existe', status:"denied"}}
+      else{
+        console.log('pasa else create')
+        const data = new Usuario(q)
+        return data.save()
+      }
+    })
     },
 
     update: q => {
