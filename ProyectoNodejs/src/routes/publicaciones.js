@@ -12,12 +12,12 @@ const ctrlPublic= require('../api/publicacion')
 
 router.post(`/`, async (req, res) => {
     console.log(req.file)
-    const {titulo, descripcion , precio } = req.body
+    const {titulo, descripcion ,categoria, precio  } = req.body
     let imagen = ""
     if (req.file && req.file.path) {
       imagen = `/upload/${req.file.filename}`
     }
-    const q = {titulo, descripcion,precio, imagen }
+    const q = {titulo, descripcion,categoria,precio, imagen }
     try {
       const data = await Publicacion.create(q)
       res.status(201).json(data)

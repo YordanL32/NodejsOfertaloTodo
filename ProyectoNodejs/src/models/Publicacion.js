@@ -6,7 +6,7 @@ var publicacionSchema = new Schema({
     titulo: {type: String, require:true},
     descripcion: {type: String, require:true},
     imagen: {type: String},
-    categoria:{ type: Schema.ObjectId, ref: "categorias" },
+    categoria:{ type: Schema.ObjectId,require:true, ref: "Categorias" },
     precio: {type: Number},
     vistas: {type: Number, default: 0},
     likes: {type: Number, default: 0},

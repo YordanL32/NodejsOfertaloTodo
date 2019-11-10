@@ -19,7 +19,7 @@ const bodyParser = require('body-parser')
 
 const app = express();
 const cors = require('cors')
-const port = process.env.PORT || 9004;
+const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 import mongoose from 'mongoose'
 import { mongoUrl } from './config'
@@ -95,13 +95,13 @@ function handleFatalError (err) {
 //conectarse a db
 sockets.startSocketServer(server)
 async function start () {
-  const db = await mongoose.connect('mongodb://127.0.0.1:27017/notasdb')
+  const db = await mongoose.connect('mongodb://127.0.0.1:27017/ofetalodb')
   if (!module.parent) {
     process.on('uncaughtException', handleFatalError)
     process.on('unhandledRejection', handleFatalError)
     
     server.listen(port, '0.0.0.0', () => {
-      console.log(`${chalk.green('[notasdb-server]')} Escuchando por el puerto: ${port}`)
+      console.log(`${chalk.green('[ofetalodb-server]')} Escuchando por el puerto: ${port}`)
     })
   }
 

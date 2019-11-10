@@ -14,7 +14,7 @@ ctrl.index =async(req, res) =>{
 /* {imagen:{$regex:req.params.publicaciones_id}} */
 ctrl.detalPublic  =async(req, res) =>{   
   try{
-    const publicaciones = await Publicacion.findOne(req.params.id); 
+    const publicaciones = await Publicacion.findById(req.params.publicaciones_id); 
       /* publicaciones.vistas = publicaciones.vistas+1;
       await publicaciones.save();
       const comentarios = await Comentario.find({publicacion_id: publicaciones._id}).sort({Create_at:'desc'});  */
@@ -25,7 +25,7 @@ ctrl.detalPublic  =async(req, res) =>{
 };
 ctrl.mostrarPublicacion= async(req, res) => {
   /* {user:req.user.id} */
-  const publicaciones = await Publicacion.find().sort({Create_at:'desc'});//ordena publicaciones por orden de fecha
+  const publicaciones = await Publicacion.find().sort({Create_at:'desc'}).populate('categoria');//ordena publicaciones por orden de fecha
   res.json(publicaciones)
   /* res.render(`publicaciones/todasPublic`,{publicaciones}); */
 }
