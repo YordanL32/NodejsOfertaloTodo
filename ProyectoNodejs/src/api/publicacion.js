@@ -40,6 +40,17 @@ ctrl.create = async(req, res)=> {
     }   
     
 }
+ctrl.update = async(req, res) =>{ 
+  try{
+    const datos  = req.body
+    const publicaciones = await Publicacion.findByIdAndUpdate(req.params.publicaciones_id, datos);
+  res.json(publicaciones);
+  console.log(publicaciones);
+  console.log('Exito al editar')
+  }catch (error) {
+    console.log('error en al actualizar metodo Update')
+  }      
+}
 ctrl.likes = async (req, res)=> {
   const publicaciones = await Publicacion.findOne({imagen:{$regex:req.params.publicaciones_id}});  
   if(publicaciones){

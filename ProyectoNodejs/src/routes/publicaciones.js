@@ -28,6 +28,7 @@ router.post(`/`, async (req, res) => {
 
 /* router.get(`/publicaciones/add`, ctrlPublic.index) */
 router.get(`/:publicaciones_id`, ctrlPublic.detalPublic ) 
+router.put(`/:publicaciones_id`, ctrlPublic.update ) 
 
 router.post(`/:publicaciones_id/like`, ctrlPublic.likes )
 router.post(`/:publicaciones_id/comentarios`, ctrlPublic.comentarios )
