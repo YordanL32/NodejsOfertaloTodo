@@ -23,12 +23,13 @@ const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 import mongoose from 'mongoose'
 import { mongoUrl } from './config'
-import { Usuario, Login,Categoria,Publicacion } from './routes'
+import { Usuario, Login,Categoria,Publicacion, Perfil } from './routes'
 
-app.use(cors())
+
 //inicializaciones
 //archuvis estaticos
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(cors())
 // Midlewares (antes de pasar a las rutas)
 app.use(morgan('dev'))
 app.use(bodyParser.json({limit: '50mb'}))
@@ -74,9 +75,9 @@ app.use(session({
 // routes 
 app.use('/api/login', Login)
 app.use('/api/usuario/', Usuario)
-app.use('/api/categorias/', Categoria)
+app.use('/api/categoria/', Categoria)
 app.use('/api/publicaciones/', Publicacion)
-
+app.use('/api/perfil/', Perfil)
 app.use((err, req, res, next) => {
  debug(`Error: ${err.message}`)
 
@@ -91,6 +92,8 @@ function handleFatalError (err) {
   console.error(`${chalk.red(['fatal error'])} ${err.message}`)
   console.error(err.stack)
 }
+
+
 
 //conectarse a db
 sockets.startSocketServer(server)
