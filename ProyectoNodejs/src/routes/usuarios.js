@@ -74,7 +74,7 @@ app.get('/', async (req, res) => {
     })
       
    })
-  app.post("/" ,Auth.isUsuario, async (req, res) => {
+  app.post("/" , async (req, res) => {
     try {
     	console.log('pasa por ')
       let q = req.body;
