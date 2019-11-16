@@ -13,6 +13,7 @@ export default {
     debug(`Finding login for createToken.`)
     const payload = {
         sub: user._id,
+        rol: user.rol,
         iat: moment().unix(),
         exp: moment().add(14, 'days').unix()
     }
@@ -25,11 +26,11 @@ export default {
             const payload = jwt.decode(token, config.SECRET_TOKEN)
 
             if (payload.exp <= moment().unix()) {
-                res.status(200).send({ message: `El token a expirado`, status: 'denied', redirect: '/login.html' })
+                res.status(200).send({ message: `El token a expirado`, status: 'denied', redirect: '/' })
             }
             resolve(payload)
         } catch (err) {
-            return res.status(401).send({ message: `Token Invalido`, status: 'denied', redirect: '/login.html' })
+            return res.status(401).send({ message: `Token Invalido`, status: 'denied', redirect: '/' })
         }
     })
 
@@ -40,11 +41,11 @@ export default {
       try {
           const payload = jwt.decode(token, config.SECRET_TOKEN)
           if (payload.exp <= moment().unix()) {
-              res.status(200).send({ message: `El token a expirado`, status: 'denied', redirect: '/login.html' })
+              res.status(200).send({ message: `El token a expirado`, status: 'denied', redirect: '/' })
           }
           resolve(payload)
       } catch (err) {
-          return res.status(401).send({ message: `Token Invalido`, status: 'denied', redirect: '/login.html' })
+          return res.status(401).send({ message: `Token Invalido`, status: 'denied', redirect: '/' })
       }
   })
   return decoded

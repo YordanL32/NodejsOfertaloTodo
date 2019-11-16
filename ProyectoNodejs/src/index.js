@@ -24,6 +24,8 @@ const server = http.createServer(app);
 import mongoose from 'mongoose'
 import { mongoUrl } from './config'
 import { Usuario, Login,Categoria,Publicacion } from './routes'
+import {Auth} from './middleware'
+// const AuthToken = require('./middleware/AuthToken')
 
 app.use(cors())
 //inicializaciones
@@ -69,11 +71,11 @@ app.use(session({
 
 
 // variables globales
-
+app.use(Auth.AuthToken);
 
 // routes 
 app.use('/api/login', Login)
-app.use('/api/usuario/', Usuario)
+app.use('/api/usuarios/', Usuario)
 app.use('/api/categorias/', Categoria)
 app.use('/api/publicaciones/', Publicacion)
 

@@ -8,7 +8,8 @@ const AdminSchema = new Schema({
     email     : { type: String, required: true},
     direccion : {type: String, required: true},
     telefono  : {type: String, required: true},
-    password  : { type: String, required: true},    
+    password  : { type: String, required: true},
+    rol       : {type: String,required:true, default: 'Administrador'},
     Create_at : {type: Date,require: true, default: Date.now}
 
 })
