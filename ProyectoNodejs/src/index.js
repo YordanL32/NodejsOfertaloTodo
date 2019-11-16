@@ -23,6 +23,8 @@ const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 import mongoose from 'mongoose'
 import { mongoUrl } from './config'
+import {Auth} from './middleware'
+// const AuthToken = require('./middleware/AuthToken')
 import { Usuario, Login,Categoria,Publicacion, Perfil } from './routes'
 
 
@@ -70,7 +72,7 @@ app.use(session({
 
 
 // variables globales
-
+app.use(Auth.AuthToken);
 
 // routes 
 app.use('/api/login', Login)

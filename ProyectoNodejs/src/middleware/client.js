@@ -57,43 +57,6 @@ function permisos(ruta, accion) {
 
 }
 
-function permisosGenerales(ruta, accion) {
-    return function(req, res, next) {
-        if (!req.headers.authorization) {
-            return res.status(403).send({status:'denied', message: 'No tienes autorización' })
-        }
-    const token = req.headers.authorization.split(' ')[1]
-    Login.decodeTokenPer(token, res)
-        .then(response => {
-          req.user = response
-          let userId = response
-          let bols = false
-          for (let i = 0; i < response.per.length; i++) {
-              for (let j = 0; j < ruta.length; j++) {
-                if (ruta[j] === response.per[i].ruta) {
-                    for (let e = 0; e < response.per[i].accion.length; e++) {
-                        if (accion === response.per[i].accion[e]) {
-                            bols = true
-                        }
-                    }
-                  }
-              }
-          }
-          if (bols === true) {
-            next()
-          }
-          if (bols === false) {
-            console.log({message: 'No Tienes los Permisos Necesarios'})
-            return res.status(403).send({message: 'No Tienes los Permisos Necesarios'})
-          }
-        })
-        .catch(response => {
-          res.status(response.status)
-        })
-    }
-
-}
-
 
 function isUsuario(req, res, next) {
     //console.log(req.body)
@@ -119,5 +82,5 @@ function isUsuario(req, res, next) {
 
 
 module.exports={
-    isAuth, isUsuario, permisos, permisosGenerales
+    isAuth, isUsuario, permisos
 }

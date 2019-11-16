@@ -8,17 +8,17 @@ const debug = new Debug('notasdb:server:api:Admin')
 
 export default {
   find: () => {
-    debug(`Finding Admins for homepage with limit.`)
-    return Admin.find().sort('nombre')
+    // debug(`Finding Admins for homepage with limit.`)
+    return Admin.find().sort({ fecha: -1 });
   },
 
   findById: (_id) => {
-    debug(`Find Admin with id: ${_id}`)
+    // debug(`Find Admin with id: ${_id}`)
     return Admin.findById(_id)
   },
 
   create: (q) => {
-    debug(`creando nuevo administrador`)
+    // debug(`creando nuevo administrador`)
     return Admin.findOne({email:q.email})
     .then(function(usuario){
       if(usuario)
@@ -29,29 +29,7 @@ export default {
       }
     })
   },
-
-  loginUsuario: (q) => {
-    return Admin.findOne({ email: q.email})
-    .then(function(usuario){
-      let status;
-      if (!usuario){
-        console.log('El usuario no existe')
-        status = 'user'
-        return status
-      }
-      else if(usuario.password!=q.password){
-        console.log('Contraseña incorrecta')
-        status = 'pass' 
-        return status
-      }
-      return usuario
-    })
-  },
-  token: (user) => {
-    let token = Login.createToken(user, 'Usuario')
-    return { status: 'Success', message: 'Te haz logueado Exitosamente', token: token, id: user._id, user: user}
-  },
-
+  
   update: (q) => {
     debug(`Updating the retiros with id: ${q._id}`)
     return Admin.updateOne({ _id: q._id }, { $set: q })
