@@ -50,7 +50,7 @@ app.get("/:id", async (req, res) => {
 
 app.post("/",  async (req, res) => {
   try {
-      const data = await Log.singIn(req.body);
+    const data = await Log.singIn(req.body);
     let q = req.body;
     res.status(201).json(data);
   } catch (error) {
