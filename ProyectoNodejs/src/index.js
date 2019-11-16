@@ -19,18 +19,19 @@ const bodyParser = require('body-parser')
 
 const app = express();
 const cors = require('cors')
-const port = process.env.PORT || 9004;
+const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 import mongoose from 'mongoose'
 import { mongoUrl } from './config'
-import { Usuario, Login,Categoria,Publicacion } from './routes'
 import {Auth} from './middleware'
 // const AuthToken = require('./middleware/AuthToken')
+import { Usuario, Login,Categoria,Publicacion, Perfil } from './routes'
 
-app.use(cors())
+
 //inicializaciones
 //archuvis estaticos
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(cors())
 // Midlewares (antes de pasar a las rutas)
 app.use(morgan('dev'))
 app.use(bodyParser.json({limit: '50mb'}))
@@ -75,10 +76,10 @@ app.use(Auth.AuthToken);
 
 // routes 
 app.use('/api/login', Login)
-app.use('/api/usuarios/', Usuario)
-app.use('/api/categorias/', Categoria)
+app.use('/api/usuario/', Usuario)
+app.use('/api/categoria/', Categoria)
 app.use('/api/publicaciones/', Publicacion)
-
+app.use('/api/perfil/', Perfil)
 app.use((err, req, res, next) => {
  debug(`Error: ${err.message}`)
 
@@ -94,16 +95,18 @@ function handleFatalError (err) {
   console.error(err.stack)
 }
 
+
+
 //conectarse a db
 sockets.startSocketServer(server)
 async function start () {
-  const db = await mongoose.connect('mongodb://127.0.0.1:27017/notasdb')
+  const db = await mongoose.connect('mongodb://127.0.0.1:27017/ofetalodb')
   if (!module.parent) {
     process.on('uncaughtException', handleFatalError)
     process.on('unhandledRejection', handleFatalError)
     
     server.listen(port, '0.0.0.0', () => {
-      console.log(`${chalk.green('[notasdb-server]')} Escuchando por el puerto: ${port}`)
+      console.log(`${chalk.green('[ofetalodb-server]')} Escuchando por el puerto: ${port}`)
     })
   }
 
