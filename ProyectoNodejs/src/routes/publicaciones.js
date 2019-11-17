@@ -1,17 +1,12 @@
 const express = require(`express`)
 const router = express.Router()
-import {Login} from "../services"
 
-const { Publicacion, Comentario} = require('../models');
-/* const modPublicacion = require('../models/Publicacion') */
-const path = require('path')
+
+
+
 const ctrlPublic= require('../api/publicacion')
 const ctrlComentario= require('../api/comentarios')
-/* router.post(`/publicaciones`, ctrlPublic.create ) */
-
 router.post(`/`, ctrlPublic.create )
-
-/* router.get(`/publicaciones/add`, ctrlPublic.index) */
 router.get(`/:publicaciones_id`, ctrlPublic.detalPublic ) 
 router.put(`/:publicaciones_id`, ctrlPublic.update ) 
 

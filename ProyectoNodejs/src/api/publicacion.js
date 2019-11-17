@@ -5,11 +5,7 @@ const { Publicacion, Usuario, Comentario} = require('../models');
 const md5 = require('md5');
 const ctrl = {}
 
-ctrl.index =async(req, res) =>{ 
-  const publicaciones = await Publicacion.find({user:req.user.id}).sort({Create_at:'desc'})
-  
-  res.render(`publicaciones/new-public`,{publicaciones})
-}
+
 ctrl.detalPublic  =async(req, res) =>{   
   try{
     const publicaciones = await Publicacion.findById(req.params.publicaciones_id); 
@@ -22,7 +18,7 @@ ctrl.detalPublic  =async(req, res) =>{
     }  
 };
 ctrl.mostrarPublicacion = async(req, res) => { 
-  const publicaciones = await Publicacion.find().sort({Create_at:'desc'}).populate('categoria');//ordena publicaciones por orden de fecha
+  const publicaciones = await Publicacion.find().sort({Create_at:'desc'}).populate('categoria user');//ordena publicaciones por orden de fecha
   res.json(publicaciones)
 }
 ctrl.create = async(req, res)=> { 
