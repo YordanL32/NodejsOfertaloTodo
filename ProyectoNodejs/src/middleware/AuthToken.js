@@ -2,7 +2,7 @@
 import { Login } from '../services'
 
 function AuthToken(req, res, next) {
-    if(req.path != '/api/login'){
+    if (req.path != '/api/login') {
         if (req.headers.authorization) {
            const token = req.headers.authorization.split(' ')[1]
           Login.decodeTok(token, res)
@@ -14,7 +14,7 @@ function AuthToken(req, res, next) {
             res.status(response.status)
         })
             }else{
-               return res.status(403).send({status:'denied', message: 'No tienes autorización is Auth' })
+               return res.status(403).send({status:'denied', message: 'no tienes autorización is Auth' })
             }
 
         }else{

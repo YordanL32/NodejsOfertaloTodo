@@ -1,7 +1,7 @@
 'use strict'
 
 import express from 'express'
-import { Usuario, Admin } from '../api'
+import { Usuario } from '../api'
 import { handleError } from '../utils'
 import {Auth} from '../middleware'
 import { Login } from '../services'
@@ -20,7 +20,7 @@ app.get("/:id", async (req, res) => {
     });
   }
 });
-app.get('/', async (req, res) => {
+app.get('/', Auth.isUsuario, async (req, res) => {
     try {
       const data = await Usuario.find()
       res.status(200).json(data)
@@ -74,7 +74,8 @@ app.get('/', async (req, res) => {
     })
       
    })
-  app.post("/" ,Auth.isUsuario, async (req, res) => {
+  app.post("/", async (req, res) => {
+    console.log('pasa')
     try {
     	console.log('pasa por ')
       let q = req.body;
