@@ -9,6 +9,7 @@ const UsuarioSchema = new Schema({
     direccion : {type: String, required: true},
     telefono  : {type: String, required: true},
     password  : { type: String, required: true},
+    imagen    : {type: String},
     rol       : {type: String, required: true, default: 'regular', enum: [ 'regular','Administrador']},
     Create_at : {type: Date,required: true, default: Date.now}
 

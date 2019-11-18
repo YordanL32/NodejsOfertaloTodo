@@ -24,7 +24,7 @@ const server = http.createServer(app);
 import mongoose from 'mongoose'
 import {Auth} from './middleware'
 // const AuthToken = require('./middleware/AuthToken')
-import { Usuario, Login,Categoria,Publicacion, Perfil } from './routes'
+import { Usuario, Login,Categoria,Publicacion} from './routes'
 
 
 //inicializaciones
@@ -80,7 +80,6 @@ app.use(Auth.AuthToken);
 app.use('/api/login', Login)
 app.use('/api/categoria/', Categoria)
 app.use('/api/publicaciones/', Publicacion)
-app.use('/api/perfil/', Perfil)
 app.use((err, req, res, next) => {
  debug(`Error: ${err.message}`)
 
