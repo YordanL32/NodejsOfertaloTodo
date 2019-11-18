@@ -26,7 +26,7 @@ router.post(`/`, async (req, res) => {
     }
   })
 
-/* router.get(`/publicaciones/add`, ctrlPublic.index) */
+/* router.get(`/publicaciones/add`, ctrlPublic.index) */ 
 router.get(`/:publicaciones_id`, ctrlPublic.detalPublic ) 
 router.put(`/:publicaciones_id`, ctrlPublic.update ) 
 
