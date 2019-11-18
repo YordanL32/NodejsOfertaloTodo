@@ -20,7 +20,7 @@ app.get("/:id", async (req, res) => {
     });
   }
 });
-app.get('/', Auth.isUsuario, async (req, res) => {
+app.get('/',/*  Auth.isUsuario, */ async (req, res) => {
     try {
       const data = await Usuario.find()
       res.status(200).json(data)
@@ -104,7 +104,7 @@ app.get('/', Auth.isUsuario, async (req, res) => {
     }
   });
 
-  app.delete("/:id", Auth.isUsuario, async (req, res) => {
+  app.delete("/:id", /* Auth.isUsuario, */ async (req, res) => {
     try {
       const data = await Usuario.delete(req.params.id);
       res.status(200).json(data);

@@ -76,7 +76,7 @@ app.use(session({
 // routes 
 
 app.use('/api/usuarios/', Usuario)
-app.use(Auth.AuthToken);
+ app.use(Auth.AuthToken); 
 app.use('/api/login', Login)
 app.use('/api/categoria/', Categoria)
 app.use('/api/publicaciones/', Publicacion)
