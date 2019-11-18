@@ -22,8 +22,9 @@ const cors = require('cors')
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 import mongoose from 'mongoose'
-import { mongoUrl } from './config'
-import { Usuario, Login,Categoria,Publicacion, Perfil } from './routes'
+import {Auth} from './middleware'
+// const AuthToken = require('./middleware/AuthToken')
+import { Usuario, Login,Categoria,Publicacion} from './routes'
 
 
 //inicializaciones
@@ -73,11 +74,12 @@ app.use(session({
 
 
 // routes 
+
+app.use('/api/usuarios/', Usuario)
+ app.use(Auth.AuthToken); 
 app.use('/api/login', Login)
-app.use('/api/usuario/', Usuario)
 app.use('/api/categoria/', Categoria)
 app.use('/api/publicaciones/', Publicacion)
-app.use('/api/perfil/', Perfil)
 app.use((err, req, res, next) => {
  debug(`Error: ${err.message}`)
 

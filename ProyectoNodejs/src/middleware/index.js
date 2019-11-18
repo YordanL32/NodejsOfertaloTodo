@@ -1,1 +1,1 @@
-export { default as Auth } from './client'
+export { default as Auth } from './AuthToken'
