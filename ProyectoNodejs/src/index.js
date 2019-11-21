@@ -24,7 +24,7 @@ const server = http.createServer(app);
 import mongoose from 'mongoose'
 import {Auth} from './middleware'
 // const AuthToken = require('./middleware/AuthToken')
-import { Usuario, Login,Categoria,Publicacion} from './routes'
+import { Usuario, Login,Categoria,Publicacion, Catalogo, Compartir, MisCompartidas} from './routes'
 
 
 //inicializaciones
@@ -76,10 +76,13 @@ app.use(session({
 // routes 
 
 app.use('/api/usuarios/', Usuario)
- app.use(Auth.AuthToken); 
+app.use('/api/catalogo/', Catalogo)
+ /* app.use(Auth.AuthToken);  */
 app.use('/api/login', Login)
 app.use('/api/categoria/', Categoria)
 app.use('/api/publicaciones/', Publicacion)
+app.use('/api/compartir/', Compartir)
+app.use('/api/misCompartidas/', MisCompartidas)
 app.use((err, req, res, next) => {
  debug(`Error: ${err.message}`)
 
