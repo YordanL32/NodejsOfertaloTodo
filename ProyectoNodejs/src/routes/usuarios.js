@@ -1,7 +1,7 @@
 'use strict'
 
 import express from 'express'
-import { Usuario } from '../api'
+import { Usuario , Publicacion } from '../api'
 import { handleError } from '../utils'
 import {Auth} from '../middleware'
 import { Login } from '../services'
@@ -20,17 +20,14 @@ app.get("/:id", async (req, res) => {
     });
   }
 });
-app.get('/',/*  Auth.isUsuario, */ async (req, res) => {
-  try{ 
-  const data = await Usuario.find()
-  res.status(200).json(data)
-}catch (error){
-  handleError(error, res)
-}
-  
-
-}); 
-    
+  app.get('/',/*  Auth.isUsuario, */  async (req, res) => {
+    try {
+      const data = await Usuario.find()
+      res.status(200).json(data)
+    } catch (error) {
+      handleError(error, res)
+    }
+  });   
   app.get('/refresh/:_id', async (req, res) => {
       console.log('pasa')
       const token = req.headers.authorization.split(' ')[1]
@@ -90,7 +87,7 @@ app.get('/',/*  Auth.isUsuario, */ async (req, res) => {
       
       const q = {nombre, apellido, email, direccion, telefono, password, imagen }
       console.log(q)
-      
+
       const data = await Usuario.create(q);
       res.status(201).json(data);
     } catch (error) {

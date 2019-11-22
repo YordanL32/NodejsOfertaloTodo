@@ -1,5 +1,6 @@
 'use strict'
-import { Usuario } from "../models";
+import { Usuario, Publicacion } from "../models";
+import {Login} from "../services"
 //import Debug from 'debug'
 //const debug = new Debug('usuario:server:api:usuario')
 
@@ -7,6 +8,10 @@ export default{
     find: () => {
       return Usuario.find().sort({ fecha: -1 });
     },
+    miCatalogo: (usuario) => {
+      return Publicacion.find({user:usuario}).sort({Create_at:'desc'}).populate('categoria user');
+    },
+
     findById: (_id) => {
         return Usuario.findById(_id);
     },
