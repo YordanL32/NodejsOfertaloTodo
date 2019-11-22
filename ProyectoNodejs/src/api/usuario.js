@@ -7,11 +7,9 @@ export default{
     find: () => {
       return Usuario.find().sort({ fecha: -1 });
     },
-
     findById: (_id) => {
         return Usuario.findById(_id);
     },
-
     create: q => {
         return Usuario.findOne({email:q.email})
     .then(function(data){
