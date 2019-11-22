@@ -6,17 +6,14 @@ const md5 = require('md5');
 const ctrl = {}
 
 
-ctrl.detalPublic  =async(req, res) =>{   
+/* ctrl.detalPublic  =async(req, res) =>{   
   try{
-    const publicaciones = await Publicacion.findById(req.params.publicaciones_id); 
-      /* publicaciones.vistas = publicaciones.vistas+1;
-      await publicaciones.save();
-      const comentarios = await Comentario.find({publicacion_id: publicaciones._id}).sort({Create_at:'desc'});  */
+    const publicaciones = await Publicacion.findById(req.params.publicaciones_id);  
       res.json(publicaciones);
     }catch (error) {
-    console.log('Error Get por id')
+    console.log('Error Get por id  detallPublic')
     }  
-};
+}; */
 ctrl.mostrarPublicacion = async(req, res) => { 
   const publicaciones = await Publicacion.find().sort({Create_at:'desc'}).populate('categoria user');//ordena publicaciones por orden de fecha
   res.json(publicaciones)
@@ -41,9 +38,20 @@ ctrl.create = async(req, res)=> {
     }
 }
 ctrl.update = async(req, res) =>{ 
+  const token = req.headers.authorization.split(' ')[1]
+  let usu = await Login.decodeTok(token)
+  console.log('Id del token :: '+ usu.sub)
+    let user= usu.sub
   try{
-    const datos  = req.body
-    const publicaciones = await Publicacion.findByIdAndUpdate(req.params.publicaciones_id, datos);
+    const {titulo, descripcion ,categoria, precio  }  = req.body
+    let imagen = ""
+    if (req.file && req.file.path) {
+      imagen = `/upload/${req.file.filename}`
+    } else {
+      imagen = req.body.imagen
+  }
+    const q = {titulo, descripcion,categoria,precio, imagen, user }
+    const publicaciones = await Publicacion.findByIdAndUpdate(req.params.publicaciones_id, q);
   res.json(publicaciones);
   console.log(publicaciones);
   console.log('Exito al editar')
