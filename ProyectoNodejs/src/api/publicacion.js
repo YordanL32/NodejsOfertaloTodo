@@ -6,17 +6,14 @@ const md5 = require('md5');
 const ctrl = {}
 
 
-ctrl.detalPublic  =async(req, res) =>{   
+/* ctrl.detalPublic  =async(req, res) =>{   
   try{
-    const publicaciones = await Publicacion.findById(req.params.publicaciones_id); 
-      /* publicaciones.vistas = publicaciones.vistas+1;
-      await publicaciones.save();
-      const comentarios = await Comentario.find({publicacion_id: publicaciones._id}).sort({Create_at:'desc'});  */
+    const publicaciones = await Publicacion.findById(req.params.publicaciones_id);  
       res.json(publicaciones);
     }catch (error) {
-    console.log('Error Get por id')
+    console.log('Error Get por id  detallPublic')
     }  
-};
+}; */
 ctrl.mostrarPublicacion = async(req, res) => { 
   const publicaciones = await Publicacion.find().sort({Create_at:'desc'}).populate('categoria user');//ordena publicaciones por orden de fecha
   res.json(publicaciones)
