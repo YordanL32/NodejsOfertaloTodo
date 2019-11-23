@@ -15,7 +15,6 @@ export default{
     findById: (_id) => {
         return Usuario.findById(_id);
     },
-
     create: q => {
         return Usuario.findOne({email:q.email})
     .then(function(data){

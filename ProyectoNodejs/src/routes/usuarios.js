@@ -77,14 +77,23 @@ app.get("/:id", async (req, res) => {
   app.post("/", async (req, res) => {
     console.log('pasa')
     try {
-    	console.log('pasa por ')
-      let q = req.body;
+      console.log('pasa por ')
+      const {nombre, apellido, email, direccion, telefono, password  } = req.body
+      let imagen = ""
+      if (req.file && req.file.path) {
+        imagen = `/upload/${req.file.filename}`
+      }
+      
+      
+      const q = {nombre, apellido, email, direccion, telefono, password, imagen }
+      console.log(q)
+
       const data = await Usuario.create(q);
       res.status(201).json(data);
     } catch (error) {
     	console.log('pasa1')
       res.status(500).json({
-        message: 'An error ocurred',
+        message: 'Error al crear usuario',
         error: error.toString()
       });
     }

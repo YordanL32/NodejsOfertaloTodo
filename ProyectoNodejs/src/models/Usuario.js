@@ -14,7 +14,10 @@ const UsuarioSchema = new Schema({
     Create_at : {type: Date,required: true, default: Date.now}
 
 })
-
+UsuarioSchema.virtual('uniqueId')
+  .get(function () {
+    return this.imagen.replace(path.extname(this.imagen), '');
+  });
 export default mongoose.model('Usuario', UsuarioSchema)
 
 
