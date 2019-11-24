@@ -1,0 +1,65 @@
+
+ <div class="container">
+ <div class="row">
+<div class="col-mt-8" > 
+    <div class="card2 " >
+        <div class="card-header2 ">
+            <h1 class="card-title2 text-center "> Publicar</h1>
+        </div>
+        <div class="card-body"> {{!-- /publicaciones/new-public --}}
+            <form action="/publicaciones " method="POST" enctype="multipart/form-data"> 
+                <div class="form-group">
+                    <input  required type="text" name="titulo" class="form-control" placeholder="Titulo de la publicacion" autofocus>
+                </div>
+                <div class="form-group">
+                   
+                    <div class="custom-file"> 
+                        <input type="file" name="image" class="form-control " id="inputGroup" aria-describedby="inputGroupFileAddon"  required  >
+                    </div>                   
+                </div>
+                 <div class="form-group">
+                    <textarea  name="descripcion" class="form-control" placeholder="descripcion" ></textarea>
+                </div>
+                 <div class="form-group">
+                    <input   type="text" name="precio" class="form-control" placeholder="Escribe el precio" required>
+                </div>
+                 <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit">
+                        <i class="fa fa-upload"></i>
+                        Publicar</button>
+                </div>
+
+
+            </form>
+        </div>
+
+
+    </div>
+
+</div>
+<div class="col-mt-4">
+     <div class="card2 " >
+        <div class="card-header2 ">                
+                <h1 class="card-title2 text-center "><i class="far fa-images"></i>Publicaciones recientes</h1>
+        </div>
+        <div class="card-body ">  
+            <div class="row">
+                {{#each publicaciones}}            
+                         <div class="col-md-4">                 
+                            <a href="/publicaciones/{{uniqueId}}">
+                                <img src="../upload/{{imagen}}"  alt=""   class="img-thumbnail img-fluid">
+                            </a>                 
+                           {{!--  <h1>{{titulo}}</h1>                           
+                             <h1>{{precio}}</h1> --}}
+                       </div> 
+                            
+                   
+                {{/each}}  
+              </div> 
+               
+          
+    </div>
+    </div>
+</div>
+</div>
+</div>
