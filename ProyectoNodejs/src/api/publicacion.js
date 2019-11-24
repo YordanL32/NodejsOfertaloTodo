@@ -38,9 +38,20 @@ ctrl.create = async(req, res)=> {
     }
 }
 ctrl.update = async(req, res) =>{ 
+  const token = req.headers.authorization.split(' ')[1]
+  let usu = await Login.decodeTok(token)
+  console.log('Id del token :: '+ usu.sub)
+    let user= usu.sub
   try{
-    const datos  = req.body
-    const publicaciones = await Publicacion.findByIdAndUpdate(req.params.publicaciones_id, datos);
+    const {titulo, descripcion ,categoria, precio  }  = req.body
+    let imagen = ""
+    if (req.file && req.file.path) {
+      imagen = `/upload/${req.file.filename}`
+    } else {
+      imagen = req.body.imagen
+  }
+    const q = {titulo, descripcion,categoria,precio, imagen, user }
+    const publicaciones = await Publicacion.findByIdAndUpdate(req.params.publicaciones_id, q);
   res.json(publicaciones);
   console.log(publicaciones);
   console.log('Exito al editar')
