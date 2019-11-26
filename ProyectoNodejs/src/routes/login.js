@@ -9,7 +9,6 @@ import {Login} from "../services"
 
 const app = express.Router();
 
-
 app.post("/",  async (req, res) => {
   try {
     const data = await Log.singIn(req.body);

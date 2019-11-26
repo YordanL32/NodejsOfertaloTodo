@@ -78,14 +78,14 @@ app.get("/:id", async (req, res) => {
     console.log('pasa')
     try {
       console.log('pasa por ')
-      const {nombre, apellido, email, direccion, telefono, password  } = req.body
+      const {nombre, apellido, email, direccion, telefono, password, rol  } = req.body
       let imagen = ""
       if (req.file && req.file.path) {
         imagen = `/upload/${req.file.filename}`
       }
       
       
-      const q = {nombre, apellido, email, direccion, telefono, password, imagen }
+      const q = {nombre, apellido, email, direccion, telefono, password, rol, imagen }
       console.log(q)
 
       const data = await Usuario.create(q);
