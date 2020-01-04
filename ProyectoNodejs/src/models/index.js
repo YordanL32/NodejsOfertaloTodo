@@ -1,0 +1,6 @@
+export { default as Usuario } from './Usuario'
+export { default as Categoria } from './Categoria'
+export { default as Comentario } from './Comentario'
+export { default as Publicacion } from './Publicacion'
+export { default as Compartir } from './Compartir'
+export { default as Likes } from './Likes'

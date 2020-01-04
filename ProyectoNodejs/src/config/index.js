@@ -1,0 +1,1 @@
+export const SECRET_TOKEN = 'ofertalodb324n95lu11ma19ve20is'
